@@ -83,6 +83,7 @@ CREATE TABLE `patternset` (
 
 LOCK TABLES `patternset` WRITE;
 /*!40000 ALTER TABLE `patternset` DISABLE KEYS */;
+INSERT INTO `patternset` VALUES (4,'Thus begins','The Blair Witch Project',', one'),(6,'that','Titanic','is'),(9,NULL,'Titanic','in'),(1,'to','Titanic','in'),(2,'to','The Blair Witch Project','in'),(3,'that','the blair witch project','is'),(5,'that','The Blair Witch Project','is'),(7,'of','The Blair Witch Project','and'),(8,'of','The Matrix','and'),(14,'to','titanic .','in'),(10,'of','The Blair Witch Project','and'),(11,'to','The Matrix','in'),(12,'that','The Shawshank Redemption','is'),(13,'that','Episode 1','is'),(15,'that','The Matrix','is'),(16,'that','The Motorcycle Diaries','is'),(17,'to','The Shawshank Redemption','in'),(18,'of','Minority Report','and'),(19,'of','The Texas Chainsaw Massacre','and'),(20,'.','The Matrix','may');
 /*!40000 ALTER TABLE `patternset` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,4 +202,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-02-06  9:55:38
+-- Dump completed on 2014-02-06 13:40:29
