@@ -39,10 +39,11 @@ class Obie extends Controller
 			$iterasi = isset( $_GET['iterasi'] ) ? $_GET['iterasi'] : 0;
 
         	// lakukan join tabel patternset dengan tabel seedlexicon untuk menghasilkan raw data result_occurence
-			$patternset = $this->obie->get_patternset()['rows'];
+			$patternset = $this->obie->get_patternset();
 
         	// apakah ada data patternset ?
-			if( is_array( $patternset ) ) {
+			if( is_array( $patternset['rows'] ) ) {
+				$patternset = $patternset['rows'];
 
         		// ambil patternset yang hanya memiliki nilai left dan right 
 				foreach ($patternset as $i => $pattern) {
@@ -68,7 +69,8 @@ class Obie extends Controller
 				$insert_ok = $this->obie->insert_result_occurence( $patternset );
 				if( $insert_ok ) {
 				// ambil ulang data result_occurence dari database 
-					$data['result_occurence'] = $this->obie->get_result_occurence_per_iteration( $iterasi )['rows'];
+					$ro = $this->obie->get_result_occurence_per_iteration( $iterasi );
+					$data['result_occurence'] = $ro['rows'];
 					$this->data['body'] = $this->template->view('parts/tabel_patternset',$data);
 				}
 				// jika proses insert resultoccurence gagal
@@ -91,7 +93,8 @@ class Obie extends Controller
 		if( isset($_GET['iterasi']) ) {
 			$iterasi = isset( $_GET['iterasi'] ) ? $_GET['iterasi'] : 0;
 
-			$data_result_pattern = $this->obie->get_result_occurence( $iterasi )['rows'];
+			$rp = $this->obie->get_result_occurence( $iterasi );
+			$data_result_pattern = $rp['rows'];
 			
 			// lakukan perhitungan nilai Ri, Fi dan RLogF
 			$rlog_fi_and_ni = $this->obie->compute_set_of_pattern( $iterasi );
@@ -134,10 +137,12 @@ class Obie extends Controller
 			$iterasi = $_GET['iterasi'];
 
 			// ambil data result_patter berdasarkan iterasi
-			$result_pattern = $this->obie->get_result_pattern( $iterasi )['rows'];
+			$rp = $this->obie->get_result_pattern( $iterasi );
+			$result_pattern = $rp['rows'];
 			$score_extraction = $this->obie->get_patternset_for_set_of_extraction( $result_pattern );
 
-			$ro = $this->obie->get_result_occurence(1)['rows'];
+			$ro = $this->obie->get_result_occurence(1);
+			$ro = $ro['rows'];
 
 			/* -------------------------------------------------------------------------------------------------------------
 			| kolom dalam tabel skorekstraksi adalah ['match','no','RlogF','iterasi']
